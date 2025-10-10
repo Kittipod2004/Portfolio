@@ -1,7 +1,209 @@
-* {
-margin: 0;
-padding: 0;
-box-sizing: border-box;
-font-family: Arial, Helvetica, sans-serif;
-scroll-behavior: smooth;
+/* ---------- Base & Utilities ---------- */
+:root{
+  --bg: #7fd8fe;
+  --fg: #000000;        /* ตัวอักษรเข้ม */
+  --muted: #64748b;     /* คำอธิบาย */
+  --brand: #3b82f6;     /* ฟ้า */
+  --card: #ffffff;
+  --border: #e5e7eb;
+  --radius: 16px;
+  --shadow: 0 10px 30px rgba(2, 6, 23, .08);
+}
+
+*{ box-sizing:border-box; margin:0; padding:0; }
+html,body,#root{ height:100%; }
+body{ font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif; color:var(--fg); background:var(--bg); }
+img{ display:block; max-width:100%; }
+a{ color:inherit; text-decoration:none; }
+
+.container{
+  width:min(1100px, 92%);
+  margin-inline:auto;
+}
+
+/* ---------- Navbar ---------- */
+.nav{
+  position:sticky; top:0; z-index:20;
+  background:#fefefe; border-bottom:1px solid var(--border);
+  box-shadow:0 4px 18px rgba(2,6,23,.04);
+}
+.nav .inner{
+  display:flex; align-items:center; justify-content:space-between;
+  height:64px; gap:18px;
+}
+.nav .brand{ font-weight:800; letter-spacing:.3px; }
+.nav nav{ display:flex; gap:18px; }
+.nav nav a{ color:#334155; font-size:14px; }
+.nav nav a:hover{ color:var(--brand); }
+
+/* ==== HERO: match sample sizing & spacing ==== */
+.hero{
+  background:#fff;
+  padding:56px 0 24px;        /* เว้นบนพอประมาณ, ล่างเล็กลงให้ชิดแถบถัดไป */
+}
+
+.hero > .container.grid{
+  /* ความกว้างใกล้เคียงรูปแรก */
+  width:1000px;
+  max-width:88%;
+  margin:0 auto;
+
+  /* layout ใกล้เคียง sample */
+  display:grid;
+  grid-template-columns: 1.05fr .85fr;  /* ข้อความ : รูป */
+  align-items:center;
+  gap:48px;                              /* ลดช่องว่างระหว่างสองฝั่ง */
+}
+
+/* ฝั่งข้อความไม่ให้กินกว้างเกิน */
+.hero-left{ max-width:520px; }
+
+/* ระยะบรรทัดตามตัวอย่าง */
+.hero-left h3{ font-size:26px; margin:0 0 8px; font-weight:600; }
+.hero-left h1{ font-size:58px; line-height:1.05; margin:0 0 12px; font-weight:900; }
+.hero-left p { font-size:18px; line-height:1.6; margin:0 0 16px; }
+
+/* ไอคอนให้ชิดลงมาเล็กน้อย */
+/* ✅ ปรับขนาดและสไตล์ไอคอนใน hero ให้เด่นขึ้น */
+.social {
+  display: flex;
+  gap: 18px;
+  margin-top: 28px;
+}
+
+.social a {
+  width: 50px;              /* เพิ่มจาก 45px → 50px */
+  height: 50px;
+  border-radius: 50%;
+  background: #f1f5f9;
+  color: #0f172a;
+  display: grid;
+  place-items: center;
+  font-size: 22px;          /* ขยายไอคอนภายใน */
+  transition: all 0.3s ease;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+}
+
+.social a:hover {
+  background: #3b82f6;
+  color: #fff;
+  transform: translateY(-3px) scale(1.05); /* ขยับขึ้นและขยายเล็กน้อยตอน hover */
+}
+
+
+/* ขนาดรูปให้บาลานซ์ */
+/* ✅ ทำให้ภาพเป็นวงกลมสมบูรณ์ */
+.photo {
+  width: 260px;
+  height: 260px;
+  border-radius: 50%;       /* ทำให้เป็นวงกลม */
+  object-fit: cover;        /* ครอบภาพไม่ให้บิด */
+  border: 5px solid #3b82f6;
+  box-shadow: 0 0 25px rgba(59, 130, 246, 0.4);
+  display: block;
+}
+
+/* มือถือ */
+@media (max-width: 980px){
+  .hero > .container.grid{
+    grid-template-columns:1fr;
+    text-align:center;
+    gap:28px;
+  }
+  .photo{ width:200px; height:200px; }
+}
+
+
+/* ---------- Skill strip (พื้นหลังฟ้า) ---------- */
+.skills{
+  margin:48px 0; padding:28px 0; background:var(--brand); color:#fff;
+}
+.skills .heading{ text-align:center; opacity:.95; font-weight:700; margin-bottom:16px; }
+.skills .row{
+  display:flex; flex-wrap:wrap; gap:28px; justify-content:center; align-items:center;
+}
+.skills .icon{
+  width:62px; height:62px; border-radius:14px; background:rgba(255,255,255,.12);
+  display:grid; place-items:center; backdrop-filter: blur(2px);
+}
+
+/* ---------- Portfolio grid ---------- */
+.section-title{
+  text-align:center; font-size:26px; font-weight:800; margin:36px 0 18px;
+}
+.grid{
+  display:grid; gap:22px;
+  grid-template-columns: repeat(3, minmax(0,1fr));
+}
+.card{
+  background:var(--card); border:1px solid var(--border); border-radius:var(--radius);
+  overflow:hidden; box-shadow: var(--shadow); transition: transform .18s ease, box-shadow .18s ease;
+}
+.card:hover{ transform: translateY(-4px); box-shadow:0 16px 30px rgba(2,6,23,.12); }
+.card img{ width:100%; height:180px; object-fit:cover; }
+.card .body{ padding:12px 14px; }
+.card .body b{ font-size:14px; }
+
+/* ---------- Stats bar (พื้นหลังฟ้า) ---------- */
+.stats{
+  margin:42px 0 0; background:var(--brand); color:#fff; padding:28px 0 36px;
+}
+.stats .grid{
+  grid-template-columns: repeat(4, minmax(0,1fr));
+}
+.stat{
+  text-align:center; padding:10px 0;
+}
+.stat .num{ font-size:28px; font-weight:900; letter-spacing:.3px; }
+.stat .label{ opacity:.95; margin-top:6px; }
+
+/* ---------- Footer ---------- */
+.footer{
+  text-align:center; color:#64748b; padding:26px 0 36px;
+}
+
+/* ---------- Animation ---------- */
+.fade-in {
+  opacity: 0;
+  transform: scale(0.96);
+  animation: fadeIn 1s ease forwards;
+  animation-delay: 0.4s;
+}
+@keyframes fadeIn {
+  to { opacity: 1; transform: scale(1); }
+}
+
+.fade-up {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeUp 0.8s ease forwards;
+  animation-delay: 0.2s;
+}
+@keyframes fadeUp {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.float {
+  animation: float 4s ease-in-out infinite;
+}
+@keyframes float {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0); }
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 980px){
+  .hero > .container.grid{
+    flex-direction: column-reverse;
+    text-align: center;
+    gap: 40px;
+  }
+  .photo{ width:200px; height:200px; }
+}
+@media (max-width: 900px){
+  .grid{ grid-template-columns: repeat(2, minmax(0,1fr)); }
+}
+@media (max-width: 600px){
+  .grid{ grid-template-columns: 1fr; }
 }

@@ -1,8 +1,12 @@
 import React from 'react'
+import { BiColor } from 'react-icons/bi'
 
 function Navbar() {
+  
   return (
-    <div>Navbar</div>
+    
+    <div >Hello everyone my name lui nice to meet you</div>
+    
   )
 }
 

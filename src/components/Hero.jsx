@@ -1,25 +1,64 @@
-import Tilt from 'react-parallax-tilt'
-import { TypeAnimation } from 'react-type-animation'
+import React from "react";
+import Tilt from "react-parallax-tilt";
+import { TypeAnimation } from "react-type-animation";
+import { FaInstagram, FaFacebookF, FaGithub } from "react-icons/fa";
 
-export default function Hero(){
+export default function Hero() {
   return (
-    <section id="hero" style={{minHeight:'70vh',display:'grid',placeItems:'center',padding:'48px 20px',background:'#0b1220',color:'#e2e8f0'}}>
-      <div style={{display:'grid',gap:18,maxWidth:900}}>
-        <h1 style={{fontSize:38,lineHeight:1.2}}>Hi 👋 I'm <b>Lui</b></h1>
-        <TypeAnimation
-          sequence={['Student for Kasetsart university ',2000,'C++',2000,'PHP • C# • JavaScript',2000]}
-          speed={50}
-          repeat={Infinity}
-          style={{fontSize:18,opacity:.9}}
-        />
-        <Tilt glareEnable glareBorderRadius="16px">
+    <section className="hero">
+      <div className="container grid">
+        {/* ฝั่งข้อความ */}
+        <div className="hero-left">
+          <h3>Hi, its' me</h3>
+          <h1>
+            <span style={{ color: "#3b82f6", fontWeight: 700 }}>Lui</span>
+          </h1>
+
+          {/* ✅ typing animation แบบที่คุณต้องการ */}
+          <p>
+            <span style={{ marginRight: 10 }}>I'm a</span>
+            <TypeAnimation
+              sequence={[
+                "Web Developer", 2000,
+                "Backend Developer", 2000,
+              ]}
+              speed={50}         // ความเร็วพิมพ์
+              deletionSpeed={40} // ความเร็วลบ
+              repeat={Infinity}  // วนซ้ำ
+              wrapper="span"
+              cursor={true}      // ให้มีเคอร์เซอร์กระพริบ
+            />
+          </p>
+
+          <div className="social">
+            <a href="https://www.instagram.com/ktpd_lui/" target="_blank" rel="noreferrer">
+              <FaInstagram />
+            </a>
+            <a href="https://www.facebook.com/kittipod.khunatsakul.lui" target="_blank" rel="noreferrer">
+              <FaFacebookF />
+            </a>
+            <a href="https://github.com/Kittipod2004" target="_blank" rel="noreferrer">
+              <FaGithub />
+            </a>
+          </div>
+        </div>
+
+        {/* รูปภาพพร้อม tilt */}
+        <Tilt
+          className="photo-wrap"
+          tiltMaxAngleX={15}
+          tiltMaxAngleY={15}
+          transitionSpeed={2500}
+          perspective={1000}
+          scale={1.05}
+        >
           <img
-            src="https://images.unsplash.com/photo-1755956187917-65cbe263b4e6?q=80&w=685&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-            alt="hero"
-            style={{width:'100%',maxHeight:360,objectFit:'cover',borderRadius:16}}
+            className="photo"
+            src="https://images.unsplash.com/photo-1756205073620-02f2fd841881?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            alt="profile"
           />
         </Tilt>
       </div>
     </section>
-  )
+  );
 }
